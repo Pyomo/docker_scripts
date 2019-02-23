@@ -13,8 +13,8 @@ RUN pip install -U pip \
 
 # This picks up the packages installed above, plus any of their
 # dependencies
-RUN bash -c 'pkgs=`pip list --format freeze | cut -d= -f1`; \
-    echo "export DOCKER_PYTHON_CORE=$pkgs" >> /etc/bash.bashrc'
+RUN bash -l -c 'export pkgs=`pip list --format freeze | cut -d= -f1`; \
+    echo "export DOCKER_PYTHON_CORE=$pkgs" >> /etc/profile.d/docker-env.sh'
 RUN echo "DOCKER_PYTHON_CORE=${DOCKER_PYTHON_CORE}" && echo ""
 
 ENV DOCKER_PYTHON_OPTIONAL \
@@ -41,7 +41,8 @@ ENV DOCKER_PYTHON_NOT_PYPY \
     matplotlib \
     pandas \
     seaborn
-RUN (python -c "import __pypy__" 2> /dev/null) || (pip install ${DOCKER_PYTHON_NOT_PYPY})
+RUN (python -c "import __pypy__" 2> /dev/null) \
+    || (pip install ${DOCKER_PYTHON_NOT_PYPY})
 
 # These are fragile and may not work on PyPy / Python3.7
 RUN pip install PyYAML || \
