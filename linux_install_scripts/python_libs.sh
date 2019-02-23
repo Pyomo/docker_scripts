@@ -15,7 +15,9 @@ RUN pip install -U pip \
 # dependencies
 RUN bash -l -c 'export pkgs=`pip list --format freeze | cut -d= -f1`; \
     echo "export DOCKER_PYTHON_CORE=$pkgs" >> /etc/profile.d/docker-env.sh'
+ENV ENV=/etc/profile.d/docker-env.sh
 RUN echo "DOCKER_PYTHON_CORE=${DOCKER_PYTHON_CORE}" && echo ""
+RUN cat /etc/profile.d/docker-env.sh
 
 ENV DOCKER_PYTHON_OPTIONAL \
       sphinx \
