@@ -17,8 +17,7 @@ env:
   - NAME=pypy_2        SRC_IMAGE=pypy:2                SRC_PYTHON_EXE=pypy
   - NAME=anaconda_3    SRC_IMAGE=continuumio/anaconda3 SRC_PYTHON_EXE=python
   - NAME=anaconda_2    SRC_IMAGE=continuumio/anaconda  SRC_PYTHON_EXE=python
-install:
-- sudo apt-get install -y sshpass
+
 script:
 - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 - mkdir ${BUILD_DIR}
@@ -38,5 +37,9 @@ script:
      docker commit --change "ENV ${p}" ${ID} ${NAME}
   done < dynamic_vars.out
 - docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
-after_success:
-- travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
+
+deploy:
+  provider: script
+  script: travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
+  on:
+    branch: master
