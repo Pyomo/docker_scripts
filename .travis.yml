@@ -38,4 +38,5 @@ script:
      docker commit --change "ENV ${p}" ${ID} ${NAME}
   done < dynamic_vars.out
 - docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
+after_success:
 - travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
