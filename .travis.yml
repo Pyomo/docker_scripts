@@ -19,7 +19,6 @@ env:
   - NAME=anaconda_2    SRC_IMAGE=continuumio/anaconda  SRC_PYTHON_EXE=python
 
 script:
-- echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 - mkdir ${BUILD_DIR}
 - python create_linux_dockerfile.py ${SRC_IMAGE} ${SRC_PYTHON_EXE} ${BUILD_DIR}/${NAME}
 - while sleep 9m; do echo "still running..."; done &
@@ -36,10 +35,12 @@ script:
      ID=`docker ps -l -q`
      docker commit --change "ENV ${p}" ${ID} ${NAME}
   done < dynamic_vars.out
-- docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
 
 deploy:
   provider: script
-  script: travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
+  script:
+  - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+  - docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
+  - travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
   on:
     branch: master
