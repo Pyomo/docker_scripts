@@ -13,7 +13,8 @@ RUN pip install -U pip \
 
 # This picks up the packages installed above, plus any of their
 # dependencies
-ENV DOCKER_PYTHON_CORE `pip list --format freeze | cut -d= -f1`
+RUN bash -c 'pkgs=`pip list --format freeze | cut -d= -f1`; \
+    echo "export DOCKER_PYTHON_CORE=$pkgs" >> /etc/bash.bashrc'
 RUN echo "DOCKER_PYTHON_CORE=${DOCKER_PYTHON_CORE}" && echo ""
 
 ENV DOCKER_PYTHON_OPTIONAL \
