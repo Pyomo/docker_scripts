@@ -36,11 +36,11 @@ script:
      docker commit --change "ENV ${p}" ${ID} ${NAME}
   done < dynamic_vars.out
 
-deploy:
-  provider: script
-  script:
-  - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-  - docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
-  - travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
-  on:
-    branch: master
+after_success:
+  - |
+    if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+    then
+        echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+        docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
+        travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
+    fi
