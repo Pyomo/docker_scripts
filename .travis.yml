@@ -21,22 +21,21 @@ install:
 - sudo apt-get install -y sshpass
 script:
 - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-- TAG_LOCAL=${DOCKERHUB_REPOSITORY}:${NAME}
 - mkdir ${BUILD_DIR}
 - python create_linux_dockerfile.py ${SRC_IMAGE} ${SRC_PYTHON_EXE} ${BUILD_DIR}/${NAME}
 - while sleep 9m; do echo "still running..."; done &
-- docker build --compress --no-cache -t ${TAG_LOCAL} ${BUILD_DIR}/${NAME}
-- docker run ${TAG_LOCAL} /bin/sh -c "sleep 0"
+- docker build --compress --no-cache -t ${NAME} ${BUILD_DIR}/${NAME}
+- docker run ${NAME} /bin/sh -c "sleep 0"
 - ID=`docker ps -l -q`
 - docker cp ${ID}:/root/dynamic_vars.out .
-- docker run ${TAG_LOCAL} rm /root/dynamic_vars.out
+- docker run ${NAME} rm /root/dynamic_vars.out
 - |
   while read p
   do
-     docker run ${TAG_LOCAL} /bin/sh -c "sleep 0"
+     docker run ${NAME} /bin/sh -c "sleep 0"
      # get the id of the last container that was run
      ID=`docker ps -l -q`
-     docker commit --change "ENV ${p}" ${ID} ${TAG_LOCAL}
+     docker commit --change "ENV ${p}" ${ID} ${NAME}
   done < dynamic_vars.out
-- docker tag ${TAG_LOCAL} ${DOCKERHUB_USERNAME}/${TAG_LOCAL}
-- travis_retry docker push ${DOCKERHUB_USERNAME}/${TAG_LOCAL}
+- docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
+- travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
