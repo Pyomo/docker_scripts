@@ -51,6 +51,10 @@ RUN pip install PyYAML || \
 RUN pip install numba || echo failed to install numba
 RUN pip install pyodbc || echo failed to install pyodbc
 RUN pip list
+RUN (conda --version &> /dev/null && \
+     conda update -n base -c defaults conda && \
+     conda install -c conda-forge pymumps pynumero_libraries) || \
+    echo "skipping pynumero libraries"
 
 # These are the Python packages that should be removed to return to a
 # "SLIM" build
