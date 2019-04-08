@@ -3,7 +3,7 @@ RUN echo "" && \
     echo "INSTALLING IPOPT" && \
     echo "================" && \
     echo ""
-ENV IPOPT_VERSION="3.12.12"
+ENV IPOPT_VERSION="3.12.13"
 ARG TARGET="Ipopt-${IPOPT_VERSION}"
 ENV PATH="${PREFIX}/${TARGET}/build/bin:${PATH}"
 RUN cd ${PREFIX} && \
