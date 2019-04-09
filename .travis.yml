@@ -25,8 +25,8 @@ script:
 - docker build --compress --no-cache -t ${NAME} ${BUILD_DIR}/${NAME}
 - docker run ${NAME} /bin/sh -c "sleep 0"
 - ID=`docker ps -l -q`
-- docker cp ${ID}:/root/dynamic_vars.out .
-- docker run ${NAME} rm /root/dynamic_vars.out
+- docker cp ${ID}:/home/user/dynamic_vars.out .
+- docker run ${NAME} rm /home/user/dynamic_vars.out
 - |
   while read p
   do
