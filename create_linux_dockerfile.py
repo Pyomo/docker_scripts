@@ -18,7 +18,7 @@ installs = ['linux_install_scripts/libs.sh',
             'linux_install_scripts/glpk.sh',
             'linux_install_scripts/ipopt.sh',
             'linux_install_scripts/cbc.sh']
-dynamic_vars_filename = '/root/dynamic_vars.out'
+dynamic_vars_filename = '/home/user/dynamic_vars.out'
 
 def create_dockerfile(source_image, python_exe, dirname):
     out = base.format(source_image=source_image)
@@ -29,12 +29,12 @@ def create_dockerfile(source_image, python_exe, dirname):
                 '/usr/local/bin/python\n'.\
                 format(python_exe=python_exe))
     # destination for downloaded source code
-    out += "ARG PREFIX=/root\n"
+    out += "ARG PREFIX=/home/user\n"
     # where to place environment variables that had to be
     # determined at runtime (they will be added after the
     # initial build)
     out += ("ARG DYNAMIC_VARS_FILE="+dynamic_vars_filename+"\n")
-    out += ("RUN touch "+dynamic_vars_filename+"\n")
+    out += ("RUN mkdir -p ${PREFIX} && touch "+dynamic_vars_filename+"\n")
     for fname in installs:
         with open(fname) as f:
             out += f.read()
