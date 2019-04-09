@@ -3,7 +3,7 @@ RUN echo "" && \
     echo "INSTALLING CBC" && \
     echo "==============" && \
     echo ""
-ENV CBC_VERSION="2.10.1"
+ENV CBC_VERSION="2.9.9"
 ARG TARGET="Cbc-${CBC_VERSION}"
 ENV PATH="${PREFIX}/${TARGET}/build/bin:${PATH}"
 RUN cd ${PREFIX} && \
