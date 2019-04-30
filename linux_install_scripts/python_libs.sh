@@ -66,4 +66,5 @@ ENV DOCKER_PYTHON_SLIM \
     ${DOCKER_PYTHON_NOT_PYPY} \
     pyyaml \
     numba \
-    pyodbc
+    pyodbc \
+    pymumps pynumero_libraries
