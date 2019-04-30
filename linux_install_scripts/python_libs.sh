@@ -59,12 +59,3 @@ RUN (conda --version &> /dev/null && \
      conda install -c conda-forge pymumps pynumero_libraries) || \
     echo "skipping pynumero libraries"
 
-# These are the Python packages that should be removed to return to a
-# "SLIM" build
-ENV DOCKER_PYTHON_SLIM \
-    ${DOCKER_PYTHON_OPTIONAL} \
-    ${DOCKER_PYTHON_NOT_PYPY} \
-    pyyaml \
-    numba \
-    pyodbc \
-    pymumps pynumero_libraries
