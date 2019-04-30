@@ -33,7 +33,7 @@ ENV DOCKER_PYTHON_OPTIONAL \
       xlrd \
       z3-solver \
       pint \
-      pyqt \
+      PyQt5 \
       pytest \
       pytest-qt
 RUN pip install ${DOCKER_PYTHON_OPTIONAL}
