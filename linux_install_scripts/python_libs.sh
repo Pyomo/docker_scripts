@@ -32,7 +32,10 @@ ENV DOCKER_PYTHON_OPTIONAL \
       pymysql \
       xlrd \
       z3-solver \
-      pint
+      pint \
+      pyqt \
+      pytest \
+      pytest-qt
 RUN pip install ${DOCKER_PYTHON_OPTIONAL}
 
 # These currently fail on PyPy
