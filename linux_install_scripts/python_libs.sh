@@ -33,7 +33,6 @@ ENV DOCKER_PYTHON_OPTIONAL \
       xlrd \
       z3-solver \
       pint \
-      PyQt5 \
       pytest \
       pytest-qt
 RUN pip install ${DOCKER_PYTHON_OPTIONAL}
@@ -46,6 +45,19 @@ ENV DOCKER_PYTHON_NOT_PYPY \
     seaborn
 RUN (python -c "import __pypy__" 2> /dev/null) \
     || (pip install ${DOCKER_PYTHON_NOT_PYPY})
+
+ENV DOCKER_PYTHON2_NOT_PYPY \
+      PyQt4
+RUN (python -c "import __pypy__" 2> /dev/null) \
+    || (python -c 'import sys; assert sys.version_info[0] == 2' 2> /dev/null) \
+    && (pip install ${DOCKER_PYTHON2_NOT_PYPY})
+
+ENV DOCKER_PYTHON3_NOT_PYPY \
+      PyQt5
+RUN (python -c "import __pypy__" 2> /dev/null) \
+    || (python -c 'import sys; assert sys.version_info[0] == 2' 2> /dev/null) \
+    && (pip install ${DOCKER_PYTHON3_NOT_PYPY})
+
 
 # These are fragile and may not work on PyPy / Python3.7
 RUN pip install PyYAML || \
