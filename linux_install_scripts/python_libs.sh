@@ -55,7 +55,7 @@ RUN (python -c "import __pypy__" 2> /dev/null) \
 ENV DOCKER_PYTHON3_NOT_PYPY \
       PyQt5
 RUN (python -c "import __pypy__" 2> /dev/null) \
-    || (python -c 'import sys; assert sys.version_info[0] == 2' 2> /dev/null) \
+    || (python -c 'import sys; assert sys.version_info[0] == 3' 2> /dev/null) \
     && (pip install ${DOCKER_PYTHON3_NOT_PYPY})
 
 
