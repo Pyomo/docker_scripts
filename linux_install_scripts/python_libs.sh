@@ -46,25 +46,17 @@ ENV DOCKER_PYTHON_NOT_PYPY \
 RUN (python -c "import __pypy__" 2> /dev/null) \
     || (pip install ${DOCKER_PYTHON_NOT_PYPY})
 
-ENV DOCKER_PYTHON2_NOT_PYPY \
-      PyQt4
-RUN (python -c "import __pypy__" 2> /dev/null) \
-    || (python -c 'import sys; assert sys.version_info[0] == 2' 2> /dev/null) \
-    && (pip install ${DOCKER_PYTHON2_NOT_PYPY})
-
-ENV DOCKER_PYTHON3_NOT_PYPY \
-      PyQt5
-RUN (python -c "import __pypy__" 2> /dev/null) \
-    || (python -c 'import sys; assert sys.version_info[0] == 3' 2> /dev/null) \
-    && (pip install ${DOCKER_PYTHON3_NOT_PYPY})
-
-
 # These are fragile and may not work on PyPy / Python3.7
 RUN pip install PyYAML || \
     pip install https://github.com/yaml/pyyaml/archive/4.1.zip || \
     echo failed to install PyYAML
 RUN pip install numba || echo failed to install numba
 RUN pip install pyodbc || echo failed to install pyodbc
+# Likely to fail on pypy, and python 3.x
+RUN pip install PyQt4 || echo failed to install PyQt4
+# Likely to fail on pypy, and python 2.x
+RUN pip install PyQt5 || echo failed to install PyQt5
+
 RUN pip list
 RUN (conda --version &> /dev/null && \
      conda update -n base -c defaults conda && \
