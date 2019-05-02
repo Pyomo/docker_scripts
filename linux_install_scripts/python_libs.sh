@@ -32,7 +32,9 @@ ENV DOCKER_PYTHON_OPTIONAL \
       pymysql \
       xlrd \
       z3-solver \
-      pint
+      pint \
+      pytest \
+      pytest-qt
 RUN pip install ${DOCKER_PYTHON_OPTIONAL}
 
 # These currently fail on PyPy
@@ -50,17 +52,14 @@ RUN pip install PyYAML || \
     echo failed to install PyYAML
 RUN pip install numba || echo failed to install numba
 RUN pip install pyodbc || echo failed to install pyodbc
+# Likely to fail on pypy, and python 3.x
+RUN pip install PyQt4 || echo failed to install PyQt4
+# Likely to fail on pypy, and python 2.x
+RUN pip install PyQt5 || echo failed to install PyQt5
+
 RUN pip list
 RUN (conda --version &> /dev/null && \
      conda update -n base -c defaults conda && \
      conda install -c conda-forge pymumps pynumero_libraries) || \
     echo "skipping pynumero libraries"
 
-# These are the Python packages that should be removed to return to a
-# "SLIM" build
-ENV DOCKER_PYTHON_SLIM \
-    ${DOCKER_PYTHON_OPTIONAL} \
-    ${DOCKER_PYTHON_NOT_PYPY} \
-    pyyaml \
-    numba \
-    pyodbc
