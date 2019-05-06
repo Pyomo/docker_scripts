@@ -18,6 +18,9 @@ RUN bash -c 'pip list --format freeze | cut -d= -f1 | \
 RUN cat ${DYNAMIC_VARS_FILE} && echo ""
 
 ENV DOCKER_PYTHON_OPTIONAL \
+      appdirs \
+      ply \
+      six>=1.4 \
       sphinx \
       sphinx_rtd_theme \
       cffi \
@@ -45,6 +48,14 @@ ENV DOCKER_PYTHON_NOT_PYPY \
     seaborn
 RUN (python -c "import __pypy__" 2> /dev/null) \
     || (pip install ${DOCKER_PYTHON_NOT_PYPY})
+
+# These are extra packages required for Python 2.7
+ENV DOCKER_PYTHON2_ADDITIONAL \
+    argparse \
+    unittest2 \
+    ordereddict
+RUN (python -c "import sys; assert sys.version_info[0]==2" 2> /dev/null) \
+    && (pip install ${DOCKER_PYTHON2_ADDITIONAL}
 
 # These are fragile and may not work on PyPy / Python3.7
 RUN pip install PyYAML || \
