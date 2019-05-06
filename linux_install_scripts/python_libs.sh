@@ -54,8 +54,8 @@ ENV DOCKER_PYTHON2_ADDITIONAL \
     argparse \
     unittest2 \
     ordereddict
-RUN (python -c "import sys; assert sys.version_info[0]==2" 2> /dev/null) \
-    && (pip install ${DOCKER_PYTHON2_ADDITIONAL}
+RUN (python -c "import sys; assert sys.version_info[0]>2" 2> /dev/null) \
+    || (pip install ${DOCKER_PYTHON2_ADDITIONAL}) 
 
 # These are fragile and may not work on PyPy / Python3.7
 RUN pip install PyYAML || \
