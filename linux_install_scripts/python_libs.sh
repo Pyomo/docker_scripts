@@ -18,26 +18,27 @@ RUN bash -c 'pip list --format freeze | cut -d= -f1 | \
 RUN cat ${DYNAMIC_VARS_FILE} && echo ""
 
 ENV DOCKER_PYTHON_OPTIONAL \
-      appdirs \
-      ply \
-      six>=1.4 \
-      sphinx \
-      sphinx_rtd_theme \
-      cffi \
-      numpy \
-      mpi4py \
-      sympy \
-      networkx \
-      Pyro4 \
-      dill \
-      ipython \
-      openpyxl \
-      pymysql \
-      xlrd \
-      z3-solver \
-      pint \
-      pytest \
-      pytest-qt
+    appdirs \
+    ply \
+    six>=1.4 \
+    cffi \
+    cython \
+    dill \
+    ipython \
+    mpi4py \
+    networkx \
+    numpy \
+    openpyxl \
+    pint \
+    pymysql \
+    Pyro4 \
+    pytest \
+    pytest-qt \
+    sphinx \
+    sphinx_rtd_theme \
+    sympy \
+    xlrd \
+    z3-solver
 RUN pip install ${DOCKER_PYTHON_OPTIONAL}
 
 # These currently fail on PyPy
