@@ -3,7 +3,7 @@ RUN echo "" && \
     echo "INSTALLING MIPCL" && \
     echo "================" && \
     echo ""
-ENV MIPCL_VERSION="2.2.0"
+ENV MIPCL_VERSION="2.5.4"
 ARG TARGET="mipcl-${MIPCL_VERSION}"
 ENV PATH="${PREFIX}/${TARGET}/bin:${PATH}"
 RUN cd ${PREFIX} && \

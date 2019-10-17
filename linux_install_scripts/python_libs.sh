@@ -29,6 +29,7 @@ ENV DOCKER_PYTHON_OPTIONAL \
     networkx \
     numpy \
     openpyxl \
+    pathos \
     pint \
     pymysql \
     Pyro4 \
