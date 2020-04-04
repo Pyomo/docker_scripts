@@ -23,7 +23,6 @@ script:
 - mkdir ${BUILD_DIR}
 - python create_linux_dockerfile.py ${SRC_IMAGE} ${SRC_PYTHON_EXE} ${BUILD_DIR}/${NAME}
 - while sleep 9m; do echo "still running..."; done &
-- echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 - docker build --compress --no-cache -t ${NAME} ${BUILD_DIR}/${NAME}
 - docker run ${NAME} /bin/sh -c "sleep 0"
 - ID=`docker ps -l -q`
@@ -42,6 +41,7 @@ after_success:
   - |
     if [[ "$TRAVIS_BRANCH" == "master" ]]
     then
+        echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
         docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
         travis_retry docker push ${DOCKERHUB_REPOSITORY}:${NAME}
     fi
