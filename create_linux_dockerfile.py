@@ -10,7 +10,7 @@ CMD ["/bin/bash"]
 installs = ['linux_install_scripts/libs.sh',
             'linux_install_scripts/python_libs.sh',
             'linux_install_scripts/baron.sh',
-            'linux_install_scripts/mipcl.sh',
+#            'linux_install_scripts/mipcl.sh',
             'linux_install_scripts/gsl.sh',
             'linux_install_scripts/gjh.sh',
             'linux_install_scripts/gjh_asl_json.sh',
