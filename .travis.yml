@@ -39,7 +39,7 @@ script:
 
 after_success:
   - |
-    if [[ "$TRAVIS_BRANCH" == "master" ]]
+    if [[ "$TRAVIS_BRANCH" == "master" -a -z "$TRAVIS_PULL_REQUEST_BRANCH" ]]
     then
         echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
         docker tag ${NAME} ${DOCKERHUB_REPOSITORY}:${NAME}
