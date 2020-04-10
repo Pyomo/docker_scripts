@@ -8,7 +8,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get -q -y --no-install-recommends install \
         build-essential libssl-dev libffi-dev \
         wget zip unzip \
-        git subversion \
+        git subversion cmake \
         gfortran \
         libopenblas-dev \
         liblapack-dev \
