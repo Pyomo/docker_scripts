@@ -32,6 +32,7 @@ RUN mkdir ${PREFIX}/GAMS_${GAMS_VERSION} && \
     rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/apifiles/GAMS && \
     rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/apifiles/VBnet
 ARG TARGET
+RUN ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/gams
 #
 # Install GAMS Python API (but not on PyPy or CPython-3.5)
 #
