@@ -7,15 +7,19 @@ ARG TARGET="linux_x64_64_sfx.exe"
 ARG GAMS_DIR="gams29.1_linux_x64_64_sfx"
 ENV GAMS_VERSION="29.1.0"
 ENV PATH="${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}:${PATH}"
+# Note that removing GMSPython causes newer versions (certainly 29.1.0)
+# to fail to run
 RUN mkdir ${PREFIX}/GAMS_${GAMS_VERSION} && \
     cd ${PREFIX}/GAMS_${GAMS_VERSION} && \
     wget -q "https://d37drm4t2jghv5.cloudfront.net/distributions/${GAMS_VERSION}/linux/${TARGET}" && \
     chmod u+x ${TARGET} && \
     ./${TARGET} > /dev/null && \
     rm ${TARGET} && \
-    rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/GMSPython && \
+    rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/finlib_ml && \
     rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/testlib_ml && \
     rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/docs && \
+    rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/mccarl && \
+    rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/studio && \
     rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/apifiles/C && \
     rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/apifiles/CPPnet && \
     rm -r ${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}/apifiles/Data && \
