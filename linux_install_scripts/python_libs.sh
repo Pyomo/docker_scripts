@@ -47,6 +47,7 @@ ENV DOCKER_PYTHON_NOT_PYPY \
     scipy \
     matplotlib \
     pandas \
+    xpress \
     seaborn
 RUN (python -c "import __pypy__" 2> /dev/null) \
     || (pip install ${DOCKER_PYTHON_NOT_PYPY})
