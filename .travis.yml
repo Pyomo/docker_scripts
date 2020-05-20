@@ -12,10 +12,10 @@ env:
   - secure: pMfyCBohItRyKYmaqoon4ryYPJPCmWv12iMpbtE1yBcWTadmUaDvZi/zIqwHQjQj+hG+514Uus1BHlWUp7C4ygfwlCSlGWocmmmQhuUxcb5NXIunXpZuDXg7tu8mKBW343ZYDuWt+mrwRFonbdJpyToXv/ffwYgxEJ2h355DMvi8h5IAJeavqoLc/KoYY98XccMGFjgdiGrzWLodOs5mmQjIaetfGjQFtmEWkzOv3q9qgk4ys1EXOccRTAlrDlR8RXGDh+hR6xMyBy2LoRo/Wrhg4geLzXBlYcRb80LxFyHtLIzjnWqkOP8J3RYsa6+o4/ew//G1onkngz0/XJKotzd3IezqSLupDUKBCtroieJJauILZ78zHV0Yauijicd4ciu1/BeBjLg5RDQQWRm7A882yLdcdJ2h7O/YuuXCfc3mSNRSeIfax6fh89ghiRNoZGesu68duJ0nYj7Txbec7SXE3ePh/qUecMJkMhGdQPgKlUC97W0r5G8g80jNygV0Vn//ytjiW79zLSd2tX+12Oy6Xzav6nr/mbbyIv8ssnXHKH4A6bi5C2SQKer9hAZOg2l6PdIgMgkMlAy2LQEAqcFFaBzPXtc5GExseVI5ztm4QinnTFAlkQQ5nSPdEfPu4b5zWYpOyETaexQZOn0OrZatARY7uK3y/G7W6pVLO78=
   matrix:
   - NAME=python_3.8    SRC_IMAGE=python:3.8-buster             SRC_PYTHON_EXE=python
-  - NAME=python_3.7    SRC_IMAGE=python:3.7-stretch            SRC_PYTHON_EXE=python
-  - NAME=python_3.6    SRC_IMAGE=python:3.6-stretch            SRC_PYTHON_EXE=python
+  - NAME=python_3.7    SRC_IMAGE=python:3.7-buster             SRC_PYTHON_EXE=python
+  - NAME=python_3.6    SRC_IMAGE=python:3.6-buster             SRC_PYTHON_EXE=python
   - NAME=python_3.5    SRC_IMAGE=python:3.5                    SRC_PYTHON_EXE=python
-  - NAME=python_2.7    SRC_IMAGE=python:2.7-stretch            SRC_PYTHON_EXE=python
+  - NAME=python_2.7    SRC_IMAGE=python:2.7-buster             SRC_PYTHON_EXE=python
   - NAME=pypy_3        SRC_IMAGE=pypy:3                        SRC_PYTHON_EXE=pypy3
   - NAME=pypy_2        SRC_IMAGE=pypy:2                        SRC_PYTHON_EXE=pypy
   - NAME=anaconda_3    SRC_IMAGE=continuumio/anaconda3:2018.12 SRC_PYTHON_EXE=python
