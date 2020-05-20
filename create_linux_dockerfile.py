@@ -9,6 +9,7 @@ CMD ["/bin/bash"]
 
 installs = ['linux_install_scripts/libs.sh',
             'linux_install_scripts/python_libs.sh',
+            'linux_install_scripts/ipopt.sh',
             'linux_install_scripts/baron.sh',
 #            'linux_install_scripts/mipcl.sh',
             'linux_install_scripts/gsl.sh',
@@ -16,7 +17,6 @@ installs = ['linux_install_scripts/libs.sh',
             'linux_install_scripts/gjh_asl_json.sh',
             'linux_install_scripts/gams.sh',
             'linux_install_scripts/glpk.sh',
-            'linux_install_scripts/ipopt.sh',
             'linux_install_scripts/cbc.sh']
 dynamic_vars_filename = '/root/dynamic_vars.out'
 
