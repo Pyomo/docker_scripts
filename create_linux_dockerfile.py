@@ -3,6 +3,50 @@ import argparse
 
 base = \
 """FROM {source_image}
+
+# ensure local python is preferred over distribution python
+ENV PATH /usr/local/bin:$PATH
+
+# http://bugs.python.org/issue19846
+# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
+ENV LANG C.UTF-8
+
+# extra dependencies (over what buildpack-deps already includes)
+RUN apt-get update && \
+    apt-get build-dep python && \
+    apt-get install -y --no-install-recommends \
+		libbluetooth-dev \
+		tk-dev \
+		uuid-dev \
+        libffi-dev \
+        libgdbm-dev \
+        libsqlite3-dev \
+        libssl-dev \
+        zlib1g-dev \
+	&& rm -rf /var/lib/apt/lists/*
+
+ENV PYTHON_VERSION {python_version}
+ENV PYTHON_MAJOR {python_major}
+
+RUN set -ex \
+	\
+	&& curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
+    && tar -xvzf Python-${PYTHON_VERSION}.tgz \
+    && cd Python-${PYTHON_VERSION} \
+    && ./configure \
+    && make -j $(nproc) \
+    && make install \
+    && python${PYTHON_MAJOR} --version
+
+RUN cd /usr/local/bin \
+	&& ln -s idle${PYTHON_MAJOR} idle \
+	&& ln -s pydoc${PYTHON_MAJOR} pydoc \
+	&& ln -s python${PYTHON_MAJOR} python \
+	&& ln -s python${PYTHON_MAJOR}-config python-config
+
+RUN curl -O https://bootstrap.pypa.io/get-pip.py \\
+    && python get-pip.py
+
 CMD ["/bin/bash"]
 
 """
@@ -20,7 +64,8 @@ installs = ['linux_install_scripts/libs.sh',
             'linux_install_scripts/cbc.sh']
 dynamic_vars_filename = '/root/dynamic_vars.out'
 
-def create_dockerfile(source_image, python_exe, dirname):
+def create_dockerfile(source_image, python_version, python_exe, dirname):
+    python_major = python_version[0]
     out = base.format(source_image=source_image)
     # if the executable is not 'python', then
     # create a symlink
@@ -48,6 +93,9 @@ if __name__ == "__main__":
     parser.add_argument(
         'source_image',
         help='The source image to start from')
+    parser.add_argument(
+        'python_version',
+        help='The version of Python to install')
     parser.add_argument(
         'python_exe',
         help=('The name of the python executable '
