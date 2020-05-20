@@ -4,6 +4,12 @@ import argparse
 base = \
 """FROM {source_image}
 
+CMD ["/bin/bash"]
+
+"""
+
+python_install = \
+"""
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
 
@@ -47,8 +53,6 @@ RUN cd /usr/local/bin \
 RUN curl -O https://bootstrap.pypa.io/get-pip.py \\
     && python get-pip.py
 
-CMD ["/bin/bash"]
-
 """
 
 installs = ['linux_install_scripts/libs.sh',
@@ -65,8 +69,11 @@ installs = ['linux_install_scripts/libs.sh',
 dynamic_vars_filename = '/root/dynamic_vars.out'
 
 def create_dockerfile(source_image, python_version, python_exe, dirname):
-    python_major = python_version[0]
     out = base.format(source_image=source_image)
+    if source_image == 'ubuntu:18.04':
+        python_major = python_version[0]
+        out += python_install.format(python_version=python_version, python_major=python_major)
+
     # if the executable is not 'python', then
     # create a symlink
     if python_exe != 'python':
