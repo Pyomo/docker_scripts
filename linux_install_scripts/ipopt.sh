@@ -12,5 +12,5 @@ RUN mkdir -p ${PREFIX}/IDAES_${IDAES_VERSION}/${IPOPT_DIR} && \
     wget -q "https://github.com/IDAES/idaes-ext/releases/download/2.0.0/idaes-solvers-ubuntu1804-64.tar.gz" && \
     tar -xzf ${TARGET}.tar.gz && \
     rm -rf ${TARGET}.tar.gz
-RUN ${PREFIX}/IDAES_${IDAES_VERSION}/${IPOPT_DIR}/ipopt
+RUN ${PREFIX}/IDAES_${IDAES_VERSION}/${IPOPT_DIR}/ipopt -h
 ARG TARGET
