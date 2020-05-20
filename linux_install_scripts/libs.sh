@@ -8,9 +8,11 @@ RUN dpkg --add-architecture i386 && \
     apt-get -q -y --no-install-recommends install \
         build-essential libssl-dev libffi-dev \
         wget zip unzip \
-        git subversion \
+        git subversion cmake \
         gfortran \
+        libgfortran4 \
         libopenblas-dev \
+        liblapack-dev \
         openmpi-bin openmpi-common libopenmpi-dev \
         libc6:i386 libncurses5:i386 libstdc++6:i386 \
         enchant \

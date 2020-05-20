@@ -17,7 +17,8 @@ installs = ['linux_install_scripts/libs.sh',
             'linux_install_scripts/gams.sh',
             'linux_install_scripts/glpk.sh',
             'linux_install_scripts/ipopt.sh',
-            'linux_install_scripts/cbc.sh']
+            'linux_install_scripts/cbc.sh'
+            ]
 dynamic_vars_filename = '/root/dynamic_vars.out'
 
 def create_dockerfile(source_image, python_exe, dirname):
