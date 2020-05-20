@@ -8,7 +8,7 @@ RUN apt-get -q update && \
         build-essential libssl-dev libffi-dev \
         wget zip unzip \
         git subversion cmake \
-        gfortran \
+        gfortran glpk-utils \
         libgfortran4 \
         libopenblas-dev \
         liblapack-dev \
