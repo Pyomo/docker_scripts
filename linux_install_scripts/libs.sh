@@ -10,7 +10,7 @@ RUN dpkg --add-architecture i386 && \
         wget zip unzip \
         git subversion cmake \
         gfortran \
-        libgfortran4 \
+        gcc-7 g++-7 \
         libopenblas-dev \
         liblapack-dev \
         openmpi-bin openmpi-common libopenmpi-dev \
