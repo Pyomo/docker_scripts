@@ -18,7 +18,7 @@ env:
   - NAME=python_2.7    SRC_IMAGE=python:2.7-buster             SRC_PYTHON_EXE=python
   - NAME=pypy_3        SRC_IMAGE=pypy:3                        SRC_PYTHON_EXE=pypy3
   - NAME=pypy_2        SRC_IMAGE=pypy:2                        SRC_PYTHON_EXE=pypy
-  - NAME=anaconda_3    SRC_IMAGE=continuumio/anaconda3:latest   SRC_PYTHON_EXE=python
+  - NAME=anaconda_3    SRC_IMAGE=continuumio/anaconda3:latest  SRC_PYTHON_EXE=python
   - NAME=anaconda_2    SRC_IMAGE=continuumio/anaconda2:latest  SRC_PYTHON_EXE=python
 
 script:
