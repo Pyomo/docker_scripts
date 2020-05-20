@@ -68,11 +68,8 @@ installs = ['linux_install_scripts/libs.sh',
             'linux_install_scripts/cbc.sh']
 dynamic_vars_filename = '/root/dynamic_vars.out'
 
-def create_dockerfile(source_image, python_version, python_exe, dirname):
+def create_dockerfile(source_image, python_exe, dirname):
     out = base.format(source_image=source_image)
-    if source_image == 'ubuntu:18.04':
-        python_major = python_version[0]
-        out += python_install.format(python_version=python_version, python_major=python_major)
 
     # if the executable is not 'python', then
     # create a symlink
