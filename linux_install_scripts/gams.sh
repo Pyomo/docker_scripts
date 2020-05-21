@@ -7,6 +7,7 @@ ARG TARGET="linux_x64_64_sfx.exe"
 ARG GAMS_DIR="gams29.1_linux_x64_64_sfx"
 ENV GAMS_VERSION="29.1.0"
 ENV PATH="${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}:${PATH}"
+ENV LD_LIBRARY_PATH="${PREFIX}/GAMS_${GAMS_VERSION}/${GAMS_DIR}:${LD_LIBRARY_PATH}"
 # Note that removing GMSPython causes newer versions (certainly 29.1.0)
 # to fail to run
 RUN mkdir ${PREFIX}/GAMS_${GAMS_VERSION} && \
