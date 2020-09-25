@@ -6,7 +6,7 @@ RUN echo "" && \
 ARG TARGET="amplgsl.linux-intel64"
 RUN cd ${PREFIX} && \
     rm -rf ${TARGET}.zip && \
-    wget -q "https://www.ampl.com/NEW/amplgsl/${TARGET}.zip" && \
+    wget -q --no-check-certificate "https://www.ampl.com/NEW/amplgsl/${TARGET}.zip" && \
     mkdir Gsl && \
     unzip -q -d Gsl ${TARGET}.zip && \
     cd Gsl && \
