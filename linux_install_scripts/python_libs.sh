@@ -35,6 +35,7 @@ ENV DOCKER_PYTHON_OPTIONAL \
     Pyro4 \
     pytest \
     pytest-qt \
+    python-louvain \
     sphinx \
     sphinx_rtd_theme \
     sympy \
