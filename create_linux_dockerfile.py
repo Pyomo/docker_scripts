@@ -8,6 +8,7 @@ CMD ["/bin/bash"]
 """
 
 installs = ['linux_install_scripts/libs.sh',
+            'linux_install_scripts/make_unsafe_wget.sh',
             'linux_install_scripts/python_libs.sh',
             'linux_install_scripts/baron.sh',
 #            'linux_install_scripts/mipcl.sh',
@@ -17,8 +18,8 @@ installs = ['linux_install_scripts/libs.sh',
             'linux_install_scripts/gams.sh',
             'linux_install_scripts/glpk.sh',
             'linux_install_scripts/ipopt.sh',
-            'linux_install_scripts/cbc.sh'
-            ]
+            'linux_install_scripts/cbc.sh',
+            'linux_install_scripts/restore_standard_wget.sh']
 dynamic_vars_filename = '/root/dynamic_vars.out'
 
 def create_dockerfile(source_image, python_exe, dirname):
